@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import skew
 
-
-
 """
 Creating a def function to read in the world bank dataset and returns  two 
 dataframes:one with years as columns, and the other with countries as column
@@ -171,7 +169,7 @@ plt.show()
 #The Line plot for Urban Population
 plt.figure(figsize=(10,6))
 plt.style.use('default')
-CO2_ind.plot()
+CO2_ind.plot(linestyle=('--', ':', '..', '-'))
 plt.title('Urban Population of G8 countries including China & India)')
 plt.xlabel('Year')
 plt.ylabel('Urban population')
@@ -236,7 +234,6 @@ plt.ylabel('CO2 emmission')
 plt.savefig('scatter plot China.png', dpi=300)
 plt.show()
 
-
 """
 Plotting a heatmap to show the correlation between the selected indicators in India
 """
@@ -245,7 +242,6 @@ India_country = pd.DataFrame({'CO2 emmission': CO2_ind['India'], 'Urban populati
                               'Electricity Production from nuclear sources': Elect_prod_nuclear['India'], \
                               'Renewable Energy consumption': Renew_Energy_Cons['India']}, \
                              index=['1990', '1995', '2000', '2005', '2010', '2015', '2019'])
-
 
 India_country.corr()
 #plotting the heatmap
