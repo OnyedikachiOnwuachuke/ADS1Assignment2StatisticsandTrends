@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from scipy.stats import skew
+
 
 
 """
@@ -101,6 +103,7 @@ print(Urban_pop_ind.describe())
 print(Urban_pop_ind.mean()) 
 print(Urban_pop_ind.median()) 
 print(Urban_pop_ind.std())
+print('Skewness:', Urban_pop_ind.skew())
    
 #Creating a dataFrame for CO2 emissions for further statistics analysis and plotting.
 CO2_ind = selected_countries[selected_countries["Indicator Name"] == "CO2 emissions (kt)"]
@@ -114,6 +117,7 @@ print(CO2_ind.describe())
 print(CO2_ind.mean())
 print(CO2_ind.median())
 print(CO2_ind.std())
+print('Skewness:', CO2_ind.skew())
 
 #Creating a dataFrame for Electricity production from nuclear sources for further statistics analysis and plotting.
 
@@ -128,6 +132,7 @@ print(Elect_prod_nuclear.describe())
 print(Elect_prod_nuclear.mean())
 print(Elect_prod_nuclear.median())
 print(Elect_prod_nuclear.std())
+print('Skewness:', Elect_prod_nuclear.skew())
 
 #Creating a dataFrame for Renewable energy consumption for further statistics analysis and plotting.
 Renew_Energy_Cons = selected_countries[selected_countries["Indicator Name"] == "Renewable energy consumption (% of total final energy consumption)"]
@@ -141,6 +146,7 @@ print(Renew_Energy_Cons.describe())
 print(Renew_Energy_Cons.mean())
 print(Renew_Energy_Cons.median())
 print(Renew_Energy_Cons.std())
+print('Skewness:', Renew_Energy_Cons.skew())
 
 """
 Plotting a line plot to show the trends over years for G8 countries including China & India
