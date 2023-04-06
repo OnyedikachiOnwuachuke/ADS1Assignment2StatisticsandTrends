@@ -176,24 +176,24 @@ Plotting a group bar plot to show relationship for Electricity production from n
 
 plt.style.use('seaborn')
 
-
 # create a new column with the decade for each year
-#CO2_ind['Decade'] = CO2_ind.index.map(lambda x: str(x)[:3] + '0s')
+CO2_ind['Decade'] = CO2_ind.index.map(lambda x: str(x)[:3] + '0s')
 
 # group by decade and sum the CO2 emissions for each country
-#CO2_decade = CO2_ind.groupby('Decade').sum()
+CO2_decade = CO2_ind.groupby('Decade').sum()
+
+colors = {'United States': 'blue', 'Canada': 'red', 'United Kingdom': 'green', 'France': 'orange',
+          'Germany': 'purple', 'Italy': 'brown', 'Japan': 'pink', 'Russia': 'gray', 'China': 'teal',
+          'India': 'magenta'}
 
 # create a new column with the decade for each year
 Elect_prod_nuclear['Decade'] = Elect_prod_nuclear.index.map(lambda x: str(x)[:3] + '0s')
 
 # group by decade and sum the CO2 emissions for each country
-Elect_prod_nuclear_decade = Elect_prod_nuclear.groupby('Decade').sum()
+Elect_prod_nuclear = Elect_prod_nuclear.groupby('Decade').sum()
 
-colors = {'United States': 'blue', 'Canada': 'red', 'United Kingdom': 'green', 'France': 'orange',
-          'Germany': 'purple', 'Italy': 'brown', 'Japan': 'pink', 'Russia': 'gray', 'China': 'teal',
-          'India': 'magenta'}
 # plot the data as a bar chart
-Elect_prod_nuclear.plot(kind='bar', color=[colors.get(c, 'black') for c in Elect_prod_nuclear_decade.columns])
+Elect_prod_nuclear.plot(kind='bar', color=[colors.get(c, 'black') for c in CO2_decade.columns])
 plt.title('Electricity production from nuclear sources by G8 countries including China & India')
 plt.xlabel('Decade')
 plt.ylabel('Electricity production from nuclear sources (% of total)')
