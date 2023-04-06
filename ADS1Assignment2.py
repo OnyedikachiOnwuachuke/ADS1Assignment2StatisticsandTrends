@@ -17,8 +17,8 @@ dataframes:one with years as columns, and the other with countries as column
 def read_worldbankdata(filename):
     
     """
-    A function that reads in world bank data on climate change with various indicators from 
-    and return both the original and transposed version of
+    A function that reads in world bank data on climate change with various 
+    indicators from and return both the original and transposed version of
     the dataset
     
     Args:
@@ -66,7 +66,8 @@ including China & India,and compare between the countries and the indicators
 
 """
 # using the describe function for this selected years '1990', '2000', '2010', '2014'
-stats_desc = selected_countries.groupby(["Country Name","Indicator Name"])[['1990', '2000', '2010', '2014']].describe()
+stats_desc = selected_countries.groupby(["Country Name","Indicator Name"]) \
+[['1990', '2000', '2010', '2014']].describe()
 
 print(stats_desc)
 
@@ -86,8 +87,9 @@ for name, group in summary_stats_others:
 
 
 """
-Now exploring the statistical properties of a each selected indicators and compare amongst the G8 countries
-including China & India,and compare between the countries and the indicators for a more critical summary statistics
+Now exploring the statistical properties of a each selected indicators
+and compare amongst the G8 countries including China & India,and compare between
+the countries and the indicators for a more critical summary statistics
 by creating new dataframe for each indicators for the analysis
 """
 
@@ -121,7 +123,8 @@ print('Skewness:', CO2_ind.skew())
 
 #Creating a dataFrame for Electricity production from nuclear sources for further statistics analysis and plotting.
 
-Elect_prod_nuclear = selected_countries[selected_countries["Indicator Name"] == "Electricity production from nuclear sources (% of total)"]
+Elect_prod_nuclear = selected_countries[selected_countries["Indicator Name"] == \
+                                        "Electricity production from nuclear sources (% of total)"]
 Elect_prod_nuclear = Elect_prod_nuclear.set_index('Country Name', drop=True)
 Elect_prod_nuclear = Elect_prod_nuclear.transpose().drop('Indicator Name')
 Elect_prod_nuclear[countries] = Elect_prod_nuclear[countries].apply(pd.to_numeric, errors='coerce', axis=1)
@@ -135,7 +138,8 @@ print(Elect_prod_nuclear.std())
 print('Skewness:', Elect_prod_nuclear.skew())
 
 #Creating a dataFrame for Renewable energy consumption for further statistics analysis and plotting.
-Renew_Energy_Cons = selected_countries[selected_countries["Indicator Name"] == "Renewable energy consumption (% of total final energy consumption)"]
+Renew_Energy_Cons = selected_countries[selected_countries["Indicator Name"] \
+                                       == "Renewable energy consumption (% of total final energy consumption)"]
 Renew_Energy_Cons = Renew_Energy_Cons.set_index('Country Name', drop=True)
 Renew_Energy_Cons = Renew_Energy_Cons.transpose().drop('Indicator Name')
 Renew_Energy_Cons[countries] = Renew_Energy_Cons[countries].apply(pd.to_numeric, errors='coerce', axis=1)
@@ -177,7 +181,8 @@ plt.show()
 
 
 """
-Plotting a group bar plot to show relationship for Electricity production from nuclear sources for G8 countries including China & India
+Plotting a group bar plot to show the relationship for Electricity production
+from nuclear sources for G8 countries including China & India
 """
 
 plt.style.use('seaborn')
@@ -208,7 +213,8 @@ plt.savefig('group barchat electricity production from nuclear sources.png', dpi
 plt.show()
 
 """
-Plotting a scatter plot to show relationship for Urban poulation and Renewable energy consumption in United States
+Plotting a scatter plot to show relationship for Urban poulation and Renewable energy
+consumption in United States
 """
 plt.style.use('ggplot')
 plt.scatter(Urban_pop_ind['United States'], Renew_Energy_Cons['United States'])
@@ -219,7 +225,8 @@ plt.savefig('scatter plot United States.png', dpi=300)
 plt.show()
 
 """
-Plotting a scatter plot to show relationship for CO2 emmission and Renewable energy consumption in United States
+Plotting a scatter plot to show relationship for CO2 emmission and Renewable energy
+consumption in United States
 """
 plt.style.use('ggplot')
 plt.scatter(Renew_Energy_Cons['China'], CO2_ind['China'])
@@ -234,8 +241,10 @@ plt.show()
 Plotting a heatmap to show the correlation between the selected indicators in India
 """
 # crating a DataFrame to from the dictionaries containing the different indicators
-India_country = pd.DataFrame({'CO2 emmission': CO2_ind['India'], 'Urban population': Urban_pop_ind['India'],'Electricity Production from nuclear sources': Elect_prod_nuclear['India'], \
-                              'Renewable Energy consumption': Renew_Energy_Cons['India']}, index=['1990', '1995', '2000', '2005', '2010', '2015', '2019'])
+India_country = pd.DataFrame({'CO2 emmission': CO2_ind['India'], 'Urban population': Urban_pop_ind['India'], \
+                              'Electricity Production from nuclear sources': Elect_prod_nuclear['India'], \
+                              'Renewable Energy consumption': Renew_Energy_Cons['India']}, \
+                             index=['1990', '1995', '2000', '2005', '2010', '2015', '2019'])
 
 
 India_country.corr()
