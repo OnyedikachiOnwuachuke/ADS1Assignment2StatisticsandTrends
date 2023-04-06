@@ -146,6 +146,7 @@ print(Renew_Energy_Cons.std())
 Plotting a line plot to show the trends over years for G8 countries including China & India
 for both indicators of CO2 emmissions & Urban Population
 """
+# The line plot for CO2 emissions
 plt.figure(figsize=(10,6))
 plt.style.use('default')
 CO2_ind.plot()
@@ -157,7 +158,7 @@ plt.savefig('Line plot CO2 emmisions.png', dpi=300)
 plt.show()
 
 
-
+#The Line plot for Urban Population
 plt.figure(figsize=(10,6))
 plt.style.use('default')
 CO2_ind.plot()
@@ -170,44 +171,29 @@ plt.show()
 
 
 """
-Plotting a group bar plot to show the relationship for indicator CO2 emmision for G8 countries including China & India
+Plotting a group bar plot to show relationship for Electricity production from nuclear sources for G8 countries including China & India
 """
 
 plt.style.use('seaborn')
 
 
 # create a new column with the decade for each year
-CO2_ind['Decade'] = CO2_ind.index.map(lambda x: str(x)[:3] + '0s')
+#CO2_ind['Decade'] = CO2_ind.index.map(lambda x: str(x)[:3] + '0s')
 
 # group by decade and sum the CO2 emissions for each country
-CO2_decade = CO2_ind.groupby('Decade').sum()
+#CO2_decade = CO2_ind.groupby('Decade').sum()
 
-colors = {'United States': 'blue', 'Canada': 'red', 'United Kingdom': 'green', 'France': 'orange',
-          'Germany': 'purple', 'Italy': 'brown', 'Japan': 'pink', 'Russia': 'gray', 'China': 'teal',
-          'India': 'magenta'}
-
-# plot the data as a bar chart
-CO2_decade.plot(kind='bar', color=[colors.get(c, 'black') for c in CO2_decade.columns])
-# plot the data as a bar chart
-plt.title('CO2 emissions by G8 countries including China & India')
-plt.xlabel('Decade')
-plt.ylabel('CO2 emissions (kt)')
-plt.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
-plt.savefig('group bar chat CO2 emmision.png', dpi=300)
-plt.show()
-
-
-"""
-Plotting a group bar plot to show relationship for Electricity production from nuclear sources for G8 countries including China & India
-"""
 # create a new column with the decade for each year
 Elect_prod_nuclear['Decade'] = Elect_prod_nuclear.index.map(lambda x: str(x)[:3] + '0s')
 
 # group by decade and sum the CO2 emissions for each country
-Elect_prod_nuclear = Elect_prod_nuclear.groupby('Decade').sum()
+Elect_prod_nuclear_decade = Elect_prod_nuclear.groupby('Decade').sum()
 
+colors = {'United States': 'blue', 'Canada': 'red', 'United Kingdom': 'green', 'France': 'orange',
+          'Germany': 'purple', 'Italy': 'brown', 'Japan': 'pink', 'Russia': 'gray', 'China': 'teal',
+          'India': 'magenta'}
 # plot the data as a bar chart
-Elect_prod_nuclear.plot(kind='bar', color=[colors.get(c, 'black') for c in CO2_decade.columns])
+Elect_prod_nuclear.plot(kind='bar', color=[colors.get(c, 'black') for c in Elect_prod_nuclear_decade.columns])
 plt.title('Electricity production from nuclear sources by G8 countries including China & India')
 plt.xlabel('Decade')
 plt.ylabel('Electricity production from nuclear sources (% of total)')
